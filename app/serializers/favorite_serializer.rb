@@ -1,7 +1,14 @@
 class FavoriteSerializer < ActiveModel::Serializer
-  attributes :id, :deck
+  attributes :id, :username, :deck_name
   # has_one :user
-  has_one :deck, serializer:
+  # has_one :deck
 
-  belongs_to :user
+  def username
+  object.user.username
+  end
+
+  def deck_name
+    object.deck.name
+  end
+
 end
