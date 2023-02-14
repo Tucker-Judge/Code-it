@@ -18,8 +18,14 @@ class DecksController < ApplicationController
     end
 
     def index
-        deck = Deck.all
-        render json: deck 
+        decks = Deck.all
+    new_deck = decks.where(private: false)
+        render json: new_deck
+    end
+
+    def show
+        deck = Deck.find_by(id: params[:id])
+        render json: deck
     end
     
     private

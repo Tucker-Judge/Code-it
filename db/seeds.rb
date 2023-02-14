@@ -11,7 +11,7 @@ tucker = User.create(username:"tucker", password: "123", email: "tucker@gmail.co
 alejandro = User.create(username:"alejandro", password: "123", email: "alejandro@gmail.com")
 
 javascript = Deck.create(name: "javascript", user_id: seb.id, private: true)
-ruby = Deck.create(name: "ruby", user_id: seb.id, private: true)
+ruby = Deck.create(name: "ruby", user_id: seb.id, private: false)
 
 card1 = Card.create(content: "console.log", deck_id: javascript.id)
 card2 = Card.create(content: ".foreach()", deck_id: javascript.id)
