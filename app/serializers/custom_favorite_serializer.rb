@@ -1,4 +1,4 @@
-class FavoriteSerializer < ActiveModel::Serializer
+class CustomFavoriteSerializer < ActiveModel::Serializer
   attributes :id, :username, :deck_name
   # has_one :user
   # has_one :deck
