@@ -1,11 +1,10 @@
 class ScoresController < ApplicationController
-    wrap_parameters format: []
 
     def create
+
+    end
         score = Score.create(score_params)
         render json: score
-    end
-    
     private
 
     def score_params

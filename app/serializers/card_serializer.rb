@@ -1,5 +1,4 @@
 class CardSerializer < ActiveModel::Serializer
-  attributes :content
-  # has_one :deck
-  belongs_to :deck
+  attributes :id, :content
+  has_one :deck
 end
