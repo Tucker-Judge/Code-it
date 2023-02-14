@@ -1,0 +1,2 @@
+class FavoirtesController < ApplicationController
+end
