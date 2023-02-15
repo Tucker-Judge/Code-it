@@ -10,5 +10,5 @@ class Deck < ApplicationRecord
 
   has_many :cards
 
-  validates :private, :user, :name, presence: true
+  validates :user, :name, presence: true
 end

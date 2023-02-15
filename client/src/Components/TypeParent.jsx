@@ -9,7 +9,7 @@ function TypeParent({ id }){
 
 
     useEffect(() => {
-        fetch(`http://localhost:9292/cardsets/${id}`)
+        fetch(`http://localhost:4000/cardsets/${id}`)
           .then((r) => r.json())
           .then((cards) => {
 
@@ -27,7 +27,7 @@ function TypeParent({ id }){
       }, []);
 
       useEffect(()=>{
-        fetch(`http://localhost:9292/games/4234234/${id}`, {
+        fetch(`http://localhost:4000/games/4234234/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

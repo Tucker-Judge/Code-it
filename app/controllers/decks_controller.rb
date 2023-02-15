@@ -1,8 +1,9 @@
 class DecksController < ApplicationController
     wrap_parameters format: []
+before_action :authorize
 
     def create
-        deck = Deck.create(deck_params)
+        deck = Deck.create!(deck_params)
         render json: deck
     end
     
@@ -21,15 +22,13 @@ class DecksController < ApplicationController
     #     end
 
     def show
-        session[:page_views_remaining] ||= 0
-        if session[:user_id]
+        #allowed created flashcards
+        if session[:user_id] || session[:page_views_remaining] <= 5
+            session[:page_views_remaining] ||= 0
             deck = Deck.find_by(id: params[:id])
-            render json: deck, status: 201
-        elsif session[:page_views_remaining] <= 5 
-            sessions[:page_views_remaining] += 1
-            deck = Deck.find_by(id: params[:id])
-            render json: deck, status: 201
-        else render json: {error: "huh, what are you doing here"}
+            session[:page_views_remaining] += 1
+        render json: deck
+        else render json: {error: "No pageviews remaining"}, status: :unauthorized
         end
     end
     
@@ -40,9 +39,15 @@ class DecksController < ApplicationController
     end
 
     def index
-        deck = Deck.all
         # limit by 50 on client side
-        render json: deck 
+        decks = Deck.all
+    new_deck = decks.where(private: false)
+        render json: new_deck
+    end
+
+    def show
+        deck = Deck.find_by(id: params[:id])
+        render json: deck
     end
     
     private
