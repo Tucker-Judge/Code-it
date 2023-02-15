@@ -2,7 +2,7 @@ class DecksController < ApplicationController
     wrap_parameters format: []
 
     def create
-        deck = Deck.create(deck_params)
+        deck = Deck.create!(deck_params)
         render json: deck
     end
 
