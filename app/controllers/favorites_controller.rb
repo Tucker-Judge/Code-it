@@ -2,7 +2,7 @@ class FavoritesController < ApplicationController
     wrap_parameters format: []
 
     def create
-        favorite = Favorite.create(favorite_params)
+        favorite = Favorite.create!(favorite_params)
         render json: favorite
     end
 
