@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+    
+# skip_before_action only: [:index]
     def index
         user = User.all
         render json: user

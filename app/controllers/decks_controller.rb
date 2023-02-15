@@ -1,5 +1,6 @@
 class DecksController < ApplicationController
     wrap_parameters format: []
+before_action :authorize
 
     def create
         deck = Deck.create!(deck_params)
@@ -12,11 +13,10 @@ class DecksController < ApplicationController
     end
     def show
         #allowed created flashcards
-        if 
-        session[:page_views_remaining] ||= 0
-        sessions[:page_views_remaining] += 1
-        if session[:page_views_remaining] <= 5
-        deck = Deck.find_by(id: params[:id])
+        if session[user_id] || session[:page_views_remaining] <= 5
+            session[:page_views_remaining] ||= 0
+            deck = Deck.find_by(id: params[:id])
+            sessions[:page_views_remaining] += 1
         render json: deck
         else render json {error: "No pageviews remaining"}, status: :unauthorized
         end
