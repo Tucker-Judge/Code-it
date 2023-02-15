@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 function CreateSetSets({ set, setCardSet, cardSet }){
     
     const navigate = useNavigate()
 
-    const[isPrivate, setIsPrivate] = useState(card.set.private)
+    const[isPrivate, setIsPrivate] = useState(cardSet.private)
 
     function handleDelete(){
        
@@ -44,7 +45,8 @@ function CreateSetSets({ set, setCardSet, cardSet }){
             body: JSON.stringify({private: isPrivate})
         })
         .then(res=>res.json())
-        .then()
+        .then(response =>
+            console.log(response))
     }
 
     return(
