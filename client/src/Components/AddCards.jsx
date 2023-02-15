@@ -1,9 +1,11 @@
 import { useState } from "react"
 import Header from "./Header"
+import { useParams } from "react-router-dom"
 
 function AddCards(){
     
     const [userInput, setUserInput] = useState("")
+    let {id} = useParams()
 
     function handleChange(e){
         setUserInput(e.target.value)
