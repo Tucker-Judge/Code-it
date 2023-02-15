@@ -8,7 +8,7 @@ function CreateSet({cardSet, setCardSet, setSelectedSet}){
     const [userInput, setUserInput] = useState("")
 
     function handleSubmit(){
-            fetch("http://localhost:9292/", {
+            fetch("http://localhost:4000/", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -17,9 +17,7 @@ function CreateSet({cardSet, setCardSet, setSelectedSet}){
             body: JSON.stringify({title: userInput})
         })
         .then(res=>res.json())
-        .then(newPost => setCardSet([... cardSet, newPost ]))
-        
-          
+        .then(newPost => setCardSet([... cardSet, newPost]))
     }
 
     function handleChange(e){

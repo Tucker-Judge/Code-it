@@ -17,10 +17,12 @@ function App() {
   const [selectedSet, setSelectedSet] = useState()
 
   useEffect(() => {
-    fetch("http://localhost:9292/")
+    fetch("http://localhost:4000/")
       .then((r) => r.json())
       .then((cards) => setCardSet(cards));
   }, []);
+
+  // sinatra? http://localhost:9292/
 
   //Routes (Home page, 404 page, login, createsets/cards)
   const router = createBrowserRouter([
