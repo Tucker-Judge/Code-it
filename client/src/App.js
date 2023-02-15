@@ -23,9 +23,12 @@ const [user, setUser] = useState(null)
   // }, []);
   useEffect(() => {
     fetch("http://localhost:3000/sessions")
+
       .then((r) => r.json())
       .then((loggedIn) => setUser(loggedIn));
   }, []);
+
+  // sinatra? http://localhost:9292/
 
   //Routes (Home page, 404 page, login, createsets/cards)
   const router = createBrowserRouter([

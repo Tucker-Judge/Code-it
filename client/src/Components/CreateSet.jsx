@@ -15,7 +15,9 @@ function CreateSet({user}){
     },[])
 
     function handleSubmit(){
+
             fetch("http://localhost:3000/decks", {
+
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -24,6 +26,7 @@ function CreateSet({user}){
             body: JSON.stringify({name: userInput, user_id: user.id, private: false})
         })
         .then(res=>res.json())
+
         .then(newPost => setCardSet([... cardSet, newPost ]))     
     }
 

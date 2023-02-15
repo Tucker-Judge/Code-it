@@ -8,7 +8,7 @@ function Game(){
     
     
     let {id} = useParams()
-    fetch("http://localhost:9292/games", {
+    fetch("http://localhost:4000/games", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -33,7 +33,6 @@ function Game(){
     return(
         <div>
             <Header/>
-            <Difficulty id={id}/>
             <TypeParent id={id} />
         </div>
     )
