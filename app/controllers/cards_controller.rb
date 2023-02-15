@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
     wrap_parameters format: []
+    
 
     before_action :authorize
     def create
