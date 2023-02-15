@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   
   resources :favorites, only: [:index, :create, :destroy]
-  resources :follows
+  resources :follows, only: [:create, :destroy]
   resources :scores, only: [:create]
   resources :cards, only: [:create, :destroy, :update]
-  resources :decks, only: [:index, :create, :destroy, :update, :show]
+  resources :decks
   resources :users
   # # Routing logic: fallback requests for React Router.
   # # Leave this here to help deploy your app later!

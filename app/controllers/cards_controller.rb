@@ -2,7 +2,7 @@ class CardsController < ApplicationController
     wrap_parameters format: []
 
     def create
-        card = Card.create(card_params)
+        card = Card.create!(card_params)
         render json: card
     end
 

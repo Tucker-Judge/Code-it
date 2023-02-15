@@ -2,7 +2,7 @@ class DecksController < ApplicationController
     wrap_parameters format: []
 
     def create
-        deck = Deck.create(deck_params)
+        deck = Deck.create!(deck_params)
         render json: deck
     end
     
@@ -28,9 +28,15 @@ class DecksController < ApplicationController
     end
 
     def index
-        deck = Deck.all
         # limit by 50 on client side
-        render json: deck 
+        decks = Deck.all
+    new_deck = decks.where(private: false)
+        render json: new_deck
+    end
+
+    def show
+        deck = Deck.find_by(id: params[:id])
+        render json: deck
     end
     
     private
