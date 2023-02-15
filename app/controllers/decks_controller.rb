@@ -11,16 +11,27 @@ before_action :authorize
         Deck.destroy
         render json: {}
     end
+    # def show
+    #     #allowed created flashcards
+    #     session[:page_views_remaining] ||= 0
+    #     sessions[:page_views_remaining] += 1
+    #     if session[:page_views_remaining] <= 5
+    #     deck = Deck.find_by(id: params[:id])
+    #     render json: deck
+    #     else render json {error: "No pageviews remaining"}, status: :unauthorized
+    #     end
+
     def show
         #allowed created flashcards
-        if session[user_id] || session[:page_views_remaining] <= 5
+        if session[:user_id] || session[:page_views_remaining] <= 5
             session[:page_views_remaining] ||= 0
             deck = Deck.find_by(id: params[:id])
-            sessions[:page_views_remaining] += 1
+            session[:page_views_remaining] += 1
         render json: deck
-        else render json {error: "No pageviews remaining"}, status: :unauthorized
+        else render json: {error: "No pageviews remaining"}, status: :unauthorized
         end
     end
+    
     def update
         deck = Deck.find_by(id: params[:id])
         deck.update(deck_params)

@@ -32,6 +32,9 @@ function App() {
     });
   },[]);
 
+
+  // sinatra? http://localhost:9292/
+
   //Routes (Home page, 404 page, login, createsets/cards)
   // const router = createBrowserRouter([
   //   {
