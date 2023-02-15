@@ -12,14 +12,20 @@ import {
 import {useState, useEffect} from 'react'
 
 function App() {
+const [user, setUser] = useState(null)
+  // const [cardSet, setCardSet] = useState([])
+  // const [selectedSet, setSelectedSet] = useState()
 
-  const [cardSet, setCardSet] = useState([])
-  const [selectedSet, setSelectedSet] = useState()
-
+  // useEffect(() => {
+  //   fetch("http://localhost:9292/")
+  //     .then((r) => r.json())
+  //     .then((cards) => setCardSet(cards));
+  // }, []);
   useEffect(() => {
-    fetch("http://localhost:4000/")
+    fetch("http://localhost:3000/sessions")
+
       .then((r) => r.json())
-      .then((cards) => setCardSet(cards));
+      .then((loggedIn) => setUser(loggedIn));
   }, []);
 
   // sinatra? http://localhost:9292/
@@ -40,15 +46,15 @@ function App() {
     },
     {
       path: "/createset",
-      element: <CreateSet setSelectedSet={setSelectedSet} setCardSet={setCardSet} cardSet={cardSet}/>
+      element: <CreateSet user={user}/>
     },
     {
       path: "/",
       element: <Home setSelectedSet={setSelectedSet} cardSet={cardSet}/>
     },
     {
-      path: "/addcards",
-      element: <AddCards selectedSet={selectedSet} />
+      path: "/addcards/:id",
+      element: <AddCards />
     },
     {
       path: "/score/:score",

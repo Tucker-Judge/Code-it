@@ -1,6 +1,7 @@
 class CardsController < ApplicationController
     wrap_parameters format: []
 
+    before_action :authorize
     def create
         card = Card.create!(card_params)
         render json: card
