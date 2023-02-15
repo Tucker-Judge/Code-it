@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :follows
   resources :scores, only: [:create]
   resources :cards, only: [:create, :destroy, :update]
-  resources :decks, only: [:index, :create, :destroy, :update]
+  resources :decks, only: [:index, :create, :destroy, :update, :show]
   resources :users
   # # Routing logic: fallback requests for React Router.
   # # Leave this here to help deploy your app later!
