@@ -1,18 +1,19 @@
 import CreateSetSets from "./createsetsets"
 import { useState } from "react"
 import Header from "./Header"
+import { useEffect } from "react";
 
 function CreateSet({user}){
     
     const [isClicked, setIsClicked] = useState(false)
     const [userInput, setUserInput] = useState("")
-    const [cardSet, setCardSet] = useState([])
+    const [cardSet, setCardSet] = useState(user.deck)
 
-    useEffect(()=>{
-        fetch(`http://localhost:3000/users/${user.id}`)
-        .then((r)=> r.json())
-        .then((res) => setCardSet(res.decks))
-    },[])
+    // useEffect(()=>{
+    //     fetch(`http://localhost:3000/users/${user.id}`)
+    //     .then((r)=> r.json())
+    //     .then((res) => setCardSet(res.decks))
+    // },[])
 
     function handleSubmit(){
 

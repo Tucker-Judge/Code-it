@@ -21,6 +21,14 @@ class UsersController < ApplicationController
         end
     end
 
+    def me
+        #more personal show will include email for example
+        # user = User.find(session[:user_id])
+       #comment out below for real shit 
+        user = User.find_by(user_id: session[:user_id])
+        render json: user, status: :ok
+      end
+
 
 
 

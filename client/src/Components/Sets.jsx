@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom"
 
-function Sets({set, setSelectedSet}){
+function Sets({set}){
     
     const navigate = useNavigate()
     
     function handleClick(){
-        setSelectedSet(set)
         navigate(`/game/${set.id}`)
         
         fetch(`http://localhost:9292/games/4234234/${set.id}`, {
