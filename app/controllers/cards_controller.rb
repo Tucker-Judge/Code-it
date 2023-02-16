@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
     wrap_parameters format: []
+    skip_before_action :authorize
 
-    before_action :authorize
     def create
         card = Card.create!(card_params)
         render json: card
@@ -10,7 +10,7 @@ class CardsController < ApplicationController
     def destroy
         card = Card.find_by(id: params[:id])
         card.destroy
-        render json: {}
+        head :no_content
     end
 
     def update

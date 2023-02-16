@@ -1,79 +1,90 @@
 import './App.css';
-import Login from './Components/Login';
-// import CreateSet from './Components/CreateSet';
-// import Game from './Components/Game';
-// import Home from './Components/Home';
-// import AddCards from './Components/AddCards';
-// import Score from './Components/Score';
+import { useEffect,useState } from 'react';
+import Login from './Logins/Signups/Login';
+import Home from './Home.jsx/Home';
+import Header from './Home.jsx/Header';
+import CreateDeck from './Decks.jsx/CreateDecks';
+import Game from './Game/Game';
+import Cards from './Decks.jsx/Cards';
+import Score from './Game/Score';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import {useState, useEffect} from 'react';
 
 function App() {
-
+  
   const [user, setUser] = useState(null)
 
-  // useEffect(() => {
-  //   fetch("http://localhost:9292/")
-  //     .then((r) => r.json())
-  //     .then((cards) => setCardSet(cards));
-  // }, []);
-
   useEffect(() => {
-    fetch("/profile")
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      } else {
-        setUser(null)
+    fetch(`/profile`)
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((session) => setUser(session))
+        } 
+        else {
+          console.log(null);
+        }
+      });
+  }, []);
+
+    const router = createBrowserRouter([
+      {
+        path:"/*",
+        element: <h1>404 not found</h1>
+      },
+      {
+        path: "/",
+        element: <div>
+                  <Header setUser={setUser} user={user}/>
+                  <Home user={user}/>
+                </div>
+      },
+      {
+        path:"/createDecks",
+        element: <div>
+                  <Header setUser={setUser} user={user}/>
+                  <CreateDeck user={user}/>
+                </div>
+      },
+      {
+        path:"/cards/:id",
+        element: <div>
+                  <Header setUser={setUser} user={user}/>
+                  <Cards />
+                </div>
+      },
+      {
+        path: "/game/:id",
+        element: <div>
+                  <Header setUser={setUser} user={user}/>
+                  <Game user={user}/>
+                </div>
+      },
+      {
+        path: "/score",
+        element: <div>
+                  <Header setUser={setUser} user={user}/>
+                  <Score user={user} />
+                </div>
+      },
+      {
+        path: "/public",
+        element: <div>
+                  <Header setUser={setUser} user={user}/>
+                  <Score user={user} />
+                </div>
       }
-    });
-  },[]);
-
-  //Routes (Home page, 404 page, login, createsets/cards)
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "/game/:id",
-  //     element: <Game/>,
-  //   },
-  //   {
-  //     path:"/*",
-  //     element: <h1>404 not found</h1>
-  //   },
-  //   {
-  //     path:"/login",
-  //     element: <Login />
-  //   },
-  //   {
-  //     path: "/createset",
-  //     element: <CreateSet user={user}/>
-  //   },
-  //   {
-  //     path: "/",
-  //     // element: <Home user={user}/>
-  //     element: <h1>loggedIn</h1>
-  //   },
-  //   {
-  //     path: "/addcards/:id",
-  //     element: <AddCards />
-  //   },
-  //   {
-  //     path: "/score/:score",
-  //     element: <Score />
-  //   }
-  // ]);
-
-  //return whatever the route is on
+    ]);
+  
   return (
     <div className="App">
       {user ? (
-        <h1>Logged In</h1>
-        // <RouterProvider router={router} />
+        <RouterProvider router={router} />
       ):(
-        <Login />
+        <Login setUser={setUser}/>
       )}
+      
     </div>
   );
 }

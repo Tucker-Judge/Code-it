@@ -1,5 +1,6 @@
 class FavoritesController < ApplicationController
     wrap_parameters format: []
+    skip_before_action :authorize
 
     def create
         favorite = Favorite.create!(favorite_params)
@@ -12,8 +13,9 @@ class FavoritesController < ApplicationController
         render json: {}
     end
 
-    def index
-        favorite = Favorite.all
+    def show
+        all_favorite = Favorite.all
+        favorite = all_favorite.where(user_id: params[:id])
         render json: favorite
     end
     

@@ -14,8 +14,12 @@ class SessionsController < ApplicationController
       end
     
       def destroy
+        # if session[:user_id]
         session.delete :user_id
         head :no_content
+        # else
+        #   render json: {error: "not logged in"}
+        # end
       end
 
     end
